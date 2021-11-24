@@ -12,8 +12,8 @@ curr_dict = {'us': us, 'eur': eur, 'gbp': gbp}
 old_curr = {"us": 0.0, "eur": 0.0, "gbp": 0.0}
 
 while True:
+    res = requests.get(request_mig)
     for key, curr_item in curr_dict.items():
-        res = requests.get(request_mig)
         html_content = BeautifulSoup(res.content, "lxml")
         tr_tag = html_content.find("tr", {"id": curr_item})
         split_list = tr_tag.text.split()
@@ -25,5 +25,5 @@ while True:
         if update:
             print(" ".join(tr_tag.text.split()))
 
-    time.sleep(2.5)
     print("----------------------")
+    time.sleep(2.5)
